@@ -1,0 +1,3 @@
+module_settings:
+  module_name: "Get Task"
+  module_description: "Get comprehensive information about a browser automation task."

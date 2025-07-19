@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "workflows_module_schema_version": "1.0.0"
+  },
+  "fields": [
+    {
+      "type": "connection",
+      "id": "api_connection",
+      "label": "API Connection",
+      "allowed_app_types": ["hyperline"],
+      "allowed_connection_management_types": ["managed", "custom"]
+    },
+    {"id": "task_id", "type": "string", "label": "Scheduled Task ID", "description": "ID of the scheduled task to update", "validation": {"required": true}},
+    {"id": "task", "type": "string", "label": "Task Instructions", "description": "Instructions for what the agent should do"},
+    {"id": "schedule_type", "type": "string", "label": "Schedule Type", "description": "Type of schedule: interval or cron", "choices": {"values": [{"value": "interval", "label": "Interval"}, {"value": "cron", "label": "Cron"}]}},
+    {"id": "interval_minutes", "type": "integer", "label": "Interval Minutes", "description": "Minutes between runs (required if schedule_type is interval)"},
+    {"id": "cron_expression", "type": "string", "label": "Cron Expression", "description": "Cron expression for scheduling (required if schedule_type is cron)"},
+    {"id": "start_at", "type": "string", "label": "Start At", "description": "When to start the schedule (ISO 8601 format)"},
+    {"id": "end_at", "type": "string", "label": "End At", "description": "When to end the schedule (ISO 8601 format)"},
+    {"id": "is_active", "type": "boolean", "label": "Is Active", "description": "Whether the scheduled task is active"},
+    {"id": "use_adblock", "type": "boolean", "label": "Use Adblock", "description": "Whether to use an adblocker"},
+    {"id": "use_proxy", "type": "boolean", "label": "Use Proxy", "description": "Whether to use a proxy"},
+    {"id": "highlight_elements", "type": "boolean", "label": "Highlight Elements", "description": "Whether to highlight elements on the page"},
+    {"id": "llm_model", "type": "string", "label": "LLM Model", "description": "LLM model to use", "choices": {"values": [
+      {"value": "gpt-4o", "label": "gpt-4o"},
+      {"value": "gpt-4o-mini", "label": "gpt-4o-mini"},
+      {"value": "gpt-4.1", "label": "gpt-4.1"},
+      {"value": "gpt-4.1-mini", "label": "gpt-4.1-mini"},
+      {"value": "o4-mini", "label": "o4-mini"},
+      {"value": "o3", "label": "o3"},
+      {"value": "gemini-2.0-flash", "label": "gemini-2.0-flash"},
+      {"value": "gemini-2.0-flash-lite", "label": "gemini-2.0-flash-lite"},
+      {"value": "gemini-2.5-flash-preview-04-17", "label": "gemini-2.5-flash-preview-04-17"},
+      {"value": "gemini-2.5-flash", "label": "gemini-2.5-flash"},
+      {"value": "gemini-2.5-pro", "label": "gemini-2.5-pro"},
+      {"value": "claude-3-7-sonnet-20250219", "label": "claude-3-7-sonnet-20250219"},
+      {"value": "claude-sonnet-4-20250514", "label": "claude-sonnet-4-20250514"},
+      {"value": "llama-4-maverick-17b-128e-instruct", "label": "llama-4-maverick-17b-128e-instruct"}
+    ]}},
+    {"id": "save_browser_data", "type": "boolean", "label": "Save Browser Data", "description": "Whether to save browser cookies and data between runs"},
+    {"id": "structured_output_json", "type": "string", "label": "Structured Output JSON", "description": "JSON schema for structured output"}
+  ],
+  "ui_options": {
+    "ui_order": ["api_connection", "task_id", "task", "schedule_type", "interval_minutes", "cron_expression", "start_at", "end_at", "is_active", "use_adblock", "use_proxy", "highlight_elements", "llm_model", "save_browser_data", "structured_output_json"]
+  }
+}

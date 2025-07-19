@@ -1,0 +1,26 @@
+{
+  "title": "Delete Browser Profile For User",
+  "description": "Deletes the browser profile for the user, clearing all cookies, sessions, and browser data.",
+  "type": "object",
+  "required": ["user_id"],
+  "properties": {
+    "api_connection": {
+      "type": "connection",
+      "title": "API Connection",
+      "id": "api_connection",
+      "allowed_app_types": ["hyperline"],
+      "allowed_connection_management_types": ["managed", "custom"]
+    },
+    "user_id": {
+      "type": "string",
+      "title": "User ID",
+      "description": "ID of the user whose browser profile will be deleted"
+    }
+  },
+  "ui": {
+    "order": ["api_connection", "user_id"],
+    "help": {
+      "user_id": "Enter the ID of the user whose browser profile you want to delete."
+    }
+  }
+}

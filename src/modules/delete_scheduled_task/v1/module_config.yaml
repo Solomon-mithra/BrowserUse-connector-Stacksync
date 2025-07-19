@@ -1,0 +1,4 @@
+name: delete_scheduled_task
+version: v1
+description: Deletes a scheduled task and prevents future runs.
+author: stacksync-template

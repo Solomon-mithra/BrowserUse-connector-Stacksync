@@ -1,0 +1,4 @@
+name: delete_browser_profile_for_user
+version: v1
+description: Deletes the browser profile for the user, clearing all browser data.
+author: stacksync-template

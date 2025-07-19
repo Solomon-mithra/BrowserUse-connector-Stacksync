@@ -1,0 +1,3 @@
+module_settings:
+  module_name: "Get Task Status"
+  module_description: "Get the current status of a browser automation task."

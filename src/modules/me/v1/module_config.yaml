@@ -1,0 +1,4 @@
+name: me
+version: v1
+description: Returns a boolean value indicating if the API key is valid and the user is authenticated.
+author: stacksync-template

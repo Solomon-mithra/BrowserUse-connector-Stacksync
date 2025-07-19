@@ -4,6 +4,13 @@
   },
   "fields": [
     {
+      "type": "connection",
+      "id": "api_connection",
+      "label": "API Connection",
+      "allowed_app_types": ["hyperline"],
+      "allowed_connection_management_types": ["managed", "custom"]
+    },
+    {
       "id": "task",
       "type": "string",
       "label": "Task Instructions",
@@ -34,9 +41,7 @@
         "label": "Domain",
         "content": {
           "type": ["managed"],
-          "content_objects": [
-            { "id": "domains" }
-          ]
+          "content_objects": [{ "id": "domains" }]
         }
       },
       "default": ["example.com", "anotherdomain.com"]
@@ -71,7 +76,10 @@
           { "value": "gpt-4.1", "label": "gpt-4.1" },
           { "value": "gpt-4.1-mini", "label": "gpt-4.1-mini" },
           { "value": "gemini-2.5-flash", "label": "gemini-2.5-flash" },
-          { "value": "claude-sonnet-4-20250514", "label": "claude-sonnet-4-20250514" }
+          {
+            "value": "claude-sonnet-4-20250514",
+            "label": "claude-sonnet-4-20250514"
+          }
         ]
       }
     },
@@ -156,6 +164,7 @@
   ],
   "ui_options": {
     "ui_order": [
+      "api_connection",
       "task",
       "secrets",
       "allowed_domains",

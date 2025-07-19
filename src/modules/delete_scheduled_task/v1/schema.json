@@ -1,0 +1,26 @@
+{
+  "title": "Delete Scheduled Task",
+  "description": "Deletes a scheduled task. This will prevent any future runs of this task.",
+  "type": "object",
+  "required": ["task_id"],
+  "properties": {
+    "api_connection": {
+      "type": "connection",
+      "title": "API Connection",
+      "id": "api_connection",
+      "allowed_app_types": ["hyperline"],
+      "allowed_connection_management_types": ["managed", "custom"]
+    },
+    "task_id": {
+      "type": "string",
+      "title": "Task ID",
+      "description": "ID of the scheduled task to delete"
+    }
+  },
+  "ui": {
+    "order": ["api_connection", "task_id"],
+    "help": {
+      "task_id": "Enter the ID of the scheduled task you want to delete."
+    }
+  }
+}

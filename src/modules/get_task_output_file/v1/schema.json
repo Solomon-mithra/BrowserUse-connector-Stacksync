@@ -1,0 +1,28 @@
+{
+  "metadata": {
+    "workflows_module_schema_version": "1.0.0"
+  },
+  "fields": [
+    {
+      "id": "task_id",
+      "type": "string",
+      "label": "Task ID",
+      "description": "ID of the task",
+      "validation": {
+        "required": true
+      }
+    },
+    {
+      "id": "file_name",
+      "type": "string",
+      "label": "File Name",
+      "description": "Name of the output file",
+      "validation": {
+        "required": true
+      }
+    }
+  ],
+  "ui_options": {
+    "ui_order": ["task_id", "file_name"]
+  }
+}

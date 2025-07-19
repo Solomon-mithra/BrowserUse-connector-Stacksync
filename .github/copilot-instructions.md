@@ -1,4 +1,4 @@
-# Copilot Instructions for Stacksync App Connector Template
+# Copilot Instructions for Stacksync App Connector Template (with Concrete Best Practices)
 
 ## Project Architecture
 - This repo is a template for building Stacksync workflow connectors as Python microservices.
@@ -18,11 +18,30 @@
 - Edit `app_config.yaml` for connector-wide settings.
 
 ## Schema & Endpoint Patterns
-- Module schemas (`schema.json`) define UI fields and validation for workflow actions.
-- Use field types: `string`, `boolean`, `integer`, `array`, `object`.
-- For JSON/code input, use `CodeblockWidget` with `language: json` in `ui_options`.
-- Route handlers should echo only fields defined in the schema, using `Request(flask_request).data`.
-- See `src/modules/create_contacts/` for a full-featured example.
+- **Module schemas (`schema.json`)** define UI fields, validation, and UI order for workflow actions. Always keep schema and endpoint logic tightly synchronized.
+- **Supported field types:**
+  - `string`: For text, IDs, names, etc.
+  - `boolean`: For true/false options.
+  - `integer`: For numbers, counts, intervals.
+  - `array`: For lists, multi-selects, managed arrays.
+  - `object`: For structured data, advanced config.
+- **Special field types:**
+  - For JSON/code input, use `CodeblockWidget` with `{ "ui_options": { "widget": "CodeblockWidget", "language": "json" } }`.
+  - For dropdowns or choices, use `enum` and optionally `/content` endpoint for dynamic options.
+- **Schema best practices:**
+  - Use `title` and `description` for every field for clear UI labels and help texts.
+  - Use `required` array for mandatory fields.
+  - Use `ui.order` to control field order in the UI.
+  - Use `ui.help` for field-level help text.
+  - For managed arrays, use `items` with type and UI options.
+  - For advanced validation, use `pattern`, `minimum`, `maximum`, etc.
+- **Endpoint conventions:**
+  - `/execute`: Main action endpoint. Accepts only fields defined in schema. Returns `Response(data=..., metadata=...)`.
+  - `/content`: For dynamic dropdowns or managed arrays (optional).
+  - `/schema`: Returns the module's schema (optional, POST).
+  - Always validate required fields and return clear error messages.
+  - For mock responses, return all relevant fields and metadata for UI testing.
+  - For real API calls, use `requests` and handle errors gracefully.
 
 ## Integration & Conventions
 - External API calls: use `requests` in `route.py`.
@@ -36,6 +55,16 @@
 - `src/modules/create_contacts/`: Example of all patterns.
 - `documentation/how-to-build-a-module-schema.md`: Step-by-step schema guide.
 - `config/Dockerfile.dev`, `run_dev.sh`: Dev environment setup.
+
+## Template Generation Best Practices
+- When given a set of parameters/fields, always:
+  1. Create a module directory: `src/modules/{module_name}/v1/`
+  2. Add `route.py` with `/execute` and `/schema` endpoints.
+  3. Add `schema.json` with all fields, types, UI order, help, and validation.
+  4. Add `module_config.yaml` with name, version, description, author.
+  5. Add `README.md` with endpoint usage and field descriptions.
+- Use the above schema and endpoint conventions for every new module.
+- For any new field type or UI pattern, update this file with the concrete example.
 
 ## Tips
 - Keep schema and endpoint logic tightly synchronized.

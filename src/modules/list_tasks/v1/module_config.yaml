@@ -1,0 +1,3 @@
+module_settings:
+  module_name: "List Tasks"
+  module_description: "Get a paginated list of all browser automation tasks."

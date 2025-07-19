@@ -1,0 +1,3 @@
+module_settings:
+  module_name: "Get Task Screenshots"
+  module_description: "Get screenshots generated during browser automation task execution."

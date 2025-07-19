@@ -5,14 +5,12 @@
   "fields": [
     {
       "type": "connection",
-      "id": "crm_connection",
-      "label": "CRM Connection",
-      "allowed_app_types": ["salesforce", "hubspot"],
-      "allowed_connection_management_types": ["managed", "custom"],
-      "validation": {
-        "required": true
-      }
+      "id": "api_connection",
+      "label": "API Connection",
+      "allowed_app_types": ["hyperline"],
+      "allowed_connection_management_types": ["managed", "custom"]
     },
+
     {
       "type": "object",
       "id": "object_type",
@@ -160,7 +158,7 @@
   ],
   "ui_options": {
     "ui_order": [
-      "crm_connection",
+      "api_connection",
       "object_type",
       "contacts_data",
       "required_fields",
