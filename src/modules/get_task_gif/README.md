@@ -1,11 +1,27 @@
 # Get Task GIF Module
 
-Get an animated GIF of browser automation task execution.
+## Purpose
+Get an animated GIF of the task execution. Returns a GIF URL generated from screenshots. Only available for completed tasks with screenshots.
 
 ## Endpoints
-- /execute: Retrieves GIF URL for the specified task
-- /content: (optional, not needed for this module)
-- /schema: Returns the schema for this module
+- `/execute` (POST): Returns GIF URL for a given `task_id`.
 
-## Parameters
-- task_id (string, required): ID of the task to retrieve GIF for
+## Fields
+- **api_connection**: API connection to Browser Use.
+- **task_id**: ID of the task to get GIF for.
+
+## Example Request
+```
+{
+  "api_connection": { ... },
+  "task_id": "abc123"
+}
+```
+
+## Example Response
+```
+{
+  "data": { "gif_url": "https://...gif" },
+  "metadata": { "processed_at": "2024-01-01T00:00:00Z" }
+}
+```

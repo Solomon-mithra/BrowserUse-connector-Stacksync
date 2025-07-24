@@ -1,11 +1,27 @@
 # Get Scheduled Task Module
 
-Returns detailed information about a specific scheduled browser automation task.
+## Purpose
+Get detailed information about a specific scheduled task, including its schedule configuration and current status.
 
 ## Endpoints
-- /execute: Retrieves detailed information about the specified scheduled task
-- /content: (optional, not needed for this module)
-- /schema: Returns the schema for this module
+- `/execute` (POST): Returns details for a given scheduled task ID.
 
-## Parameters
-- task_id (string, required): ID of the scheduled task to retrieve
+## Fields
+- **api_connection**: API connection to Browser Use.
+- **task_id**: ID of the scheduled task to retrieve.
+
+## Example Request
+```
+{
+  "api_connection": { ... },
+  "task_id": "abc123"
+}
+```
+
+## Example Response
+```
+{
+  "data": { ...scheduled task info... },
+  "metadata": { "processed_at": "2024-01-01T00:00:00Z" }
+}
+```

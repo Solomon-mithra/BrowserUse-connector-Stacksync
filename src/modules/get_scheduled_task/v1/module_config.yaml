@@ -1,3 +1,3 @@
 module_settings:
   module_name: "Get Scheduled Task"
-  module_description: "Returns detailed information about a specific scheduled browser automation task."
+  module_description: "Get detailed information about a specific scheduled task."

@@ -7,6 +7,7 @@
       "type": "connection",
       "id": "api_connection",
       "label": "API Connection",
+      "description": "Connect to your Browser Use API account.",
       "allowed_app_types": ["hyperline"],
       "allowed_connection_management_types": ["managed", "custom"]
     },
@@ -14,10 +15,7 @@
       "id": "task_id",
       "type": "string",
       "label": "Task ID",
-      "description": "ID of the task to retrieve screenshots for",
-      "validation": {
-        "required": true
-      }
+      "description": "Enter the ID of the task to get screenshots for."
     }
   ],
   "ui_options": {

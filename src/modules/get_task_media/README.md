@@ -1,11 +1,27 @@
 # Get Task Media Module
 
-Get media files generated during browser automation task execution.
+## Purpose
+Get media files generated during task execution. Returns links to recordings or media generated during the process. Only available for completed tasks.
 
 ## Endpoints
-- /execute: Retrieves media links for the specified task
-- /content: (optional, not needed for this module)
-- /schema: Returns the schema for this module
+- `/execute` (POST): Returns media links for a given `task_id`.
 
-## Parameters
-- task_id (string, required): ID of the task to retrieve media for
+## Fields
+- **api_connection**: API connection to Browser Use.
+- **task_id**: ID of the task to get media for.
+
+## Example Request
+```
+{
+  "api_connection": { ... },
+  "task_id": "abc123"
+}
+```
+
+## Example Response
+```
+{
+  "data": { "media": ["https://...", "https://..."] },
+  "metadata": { "processed_at": "2024-01-01T00:00:00Z" }
+}
+```

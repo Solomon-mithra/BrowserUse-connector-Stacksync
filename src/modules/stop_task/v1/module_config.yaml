@@ -1,3 +1,0 @@
-module_settings:
-  module_name: "Stop Task"
-  module_description: "Stops a running browser automation task immediately."

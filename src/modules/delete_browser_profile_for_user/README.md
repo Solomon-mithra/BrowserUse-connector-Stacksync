@@ -1,10 +1,13 @@
-# Delete Browser Profile For User Module
+# Reset Browser Profile
 
-Deletes the browser profile for a user, clearing all cookies, sessions, and browser data. Useful for starting with a fresh browser state.
+Deletes the browser profile for the user. This is useful when you want to start with a fresh browser state, clearing all stored cookies, sessions, and browser data.
 
 ## Endpoints
-- `/execute`: Deletes the browser profile for the specified user.
-- `/schema`: Returns the schema for the delete action.
+- `POST /api/v1/delete-browser-profile-for-user`
 
-## Usage
-Provide the `user_id` of the user whose browser profile you want to delete.
+## Fields
+- `api_connection`: API connection to Browser Use account.
+- `user_id`: ID of the user whose browser profile will be reset.
+
+## Example Usage
+Send a POST request with the required fields to reset the browser profile for a user.

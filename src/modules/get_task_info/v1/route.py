@@ -8,16 +8,16 @@ def extract_api_key(api_connection: dict) -> str:
         return None
     return api_connection.get("connection_data", {}).get("value", {}).get("api_key_bearer")
 
-def delete_scheduled_task(access_token: str, task_id: str):
-    url = f"https://api.browser-use.com/api/v1/scheduled-task/{task_id}"
+def get_task_info(access_token: str, task_id: str):
+    url = f"https://api.browser-use.com/api/v1/task/{task_id}"
     headers = {
         "Authorization": f"Bearer {access_token}",
         "Content-Type": "application/json"
     }
     try:
-        response = requests.delete(url, headers=headers, timeout=20)
+        response = requests.get(url, headers=headers, timeout=30)
         response.raise_for_status()
-        return response.json() if response.text else {"success": True}
+        return response.json()
     except requests.RequestException as e:
         try:
             return {"error": str(e), "details": e.response.json() if e.response else None}
@@ -27,7 +27,7 @@ def delete_scheduled_task(access_token: str, task_id: str):
 @router.route("/execute", methods=["POST"])
 def execute():
     """
-    Delete a scheduled task.
+    Get comprehensive information about a task.
     Expects 'api_connection' and 'task_id' in the request body.
     """
     try:
@@ -43,7 +43,7 @@ def execute():
         if not task_id:
             return Response.error("Missing required field: task_id.")
 
-        result = delete_scheduled_task(access_token=access_token, task_id=task_id)
+        result = get_task_info(access_token=access_token, task_id=task_id)
 
         if "error" in result:
             return Response.error(result["error"])

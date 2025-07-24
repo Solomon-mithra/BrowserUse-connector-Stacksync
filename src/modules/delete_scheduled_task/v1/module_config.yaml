@@ -1,4 +1,3 @@
-name: delete_scheduled_task
-version: v1
-description: Deletes a scheduled task and prevents future runs.
-author: stacksync-template
+module_settings:
+  module_name: "Delete Scheduled Task"
+  module_description: "Delete a scheduled task. This will prevent any future runs of this task."

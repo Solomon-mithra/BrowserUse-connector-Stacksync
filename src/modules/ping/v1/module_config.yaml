@@ -1,4 +1,0 @@
-name: ping
-version: v1
-description: Checks if the server is running and responding.
-author: stacksync-template

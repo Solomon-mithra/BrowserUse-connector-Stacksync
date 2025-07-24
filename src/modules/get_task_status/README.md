@@ -1,11 +1,27 @@
-# Get Task Status Module
+# get_task_status Module
 
-Get the current status of a browser automation task.
+## Purpose
+Get the current status of a Browser Use task. Returns only the status (created, running, finished, stopped, paused, or failed).
 
 ## Endpoints
-- /execute: Retrieves the current status of the specified task
-- /content: (optional, not needed for this module)
-- /schema: Returns the schema for this module
+- `/execute` (POST): Returns status for a given `task_id`.
 
-## Parameters
-- task_id (string, required): ID of the task to retrieve status for
+## Fields
+- **api_connection**: API connection to Browser Use.
+- **task_id**: ID of the task to check status for.
+
+## Example Request
+```
+{
+  "api_connection": { ... },
+  "task_id": "abc123"
+}
+```
+
+## Example Response
+```
+{
+  "data": { "status": "running" },
+  "metadata": { "processed_at": "2024-01-01T00:00:00Z" }
+}
+```

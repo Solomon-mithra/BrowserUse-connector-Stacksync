@@ -1,12 +1,25 @@
 # List Tasks Module
 
-Get a paginated list of all browser automation tasks.
+## Purpose
+Get a paginated list of all tasks for the user, ordered by creation date. Each task includes basic info like status and creation time.
 
 ## Endpoints
-- /execute: Retrieves a paginated list of tasks
-- /content: (optional, not needed for this module)
-- /schema: Returns the schema for this module
+- `/execute` (POST): Returns a paginated list of tasks for the user.
 
-## Parameters
-- page (integer, default: 1): Page number (minimum: 1)
-- limit (integer, default: 10): Number of items per page (minimum: 1)
+## Fields
+- **api_connection**: API connection to Browser Use.
+
+## Example Request
+```
+{
+  "api_connection": { ... }
+}
+```
+
+## Example Response
+```
+{
+  "data": { "tasks": [ ... ] },
+  "metadata": { "processed_at": "2024-01-01T00:00:00Z" }
+}
+```

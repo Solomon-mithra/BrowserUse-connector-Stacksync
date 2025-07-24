@@ -1,4 +1,0 @@
-name: check_balance
-version: v1
-description: Returns the user’s current API credit balance.
-author: stacksync-template

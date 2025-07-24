@@ -6,12 +6,13 @@ from workflows_cdk import Response, Request, ManagedError
 from main import router
 
 
-@router.route("/content", methods=["POST"])
+@router.route("/content", methods=["POST", "GET"])
 def content():
     """
     Provide dynamic content for the module UI.
     Fetches available object types and fields based on the CRM connection.
     """
+    print("Content endpoint called")
     try:
         # Parse the request
         request = Request(flask_request)
@@ -39,7 +40,7 @@ def content():
             # Object types (Contact, Lead, etc.)
             if content_name == "object_types":
                 # Simple mock data - in a real implementation, this would query the CRM API
-                if connection_type == "salesforce":
+                if True:
                     object_types = [
                         {"value": {"id": "Contact", "label": "Contact"}, "label": "Contact"},
                         {"value": {"id": "Lead", "label": "Lead"}, "label": "Lead"}

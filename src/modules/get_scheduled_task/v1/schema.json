@@ -7,6 +7,7 @@
       "type": "connection",
       "id": "api_connection",
       "label": "API Connection",
+      "description": "Connect to your Browser Use API account.",
       "allowed_app_types": ["hyperline"],
       "allowed_connection_management_types": ["managed", "custom"]
     },
@@ -14,10 +15,7 @@
       "id": "task_id",
       "type": "string",
       "label": "Scheduled Task ID",
-      "description": "ID of the scheduled task to retrieve",
-      "validation": {
-        "required": true
-      }
+      "description": "ID of the scheduled task to retrieve."
     }
   ],
   "ui_options": {

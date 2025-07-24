@@ -7,57 +7,301 @@
       "type": "connection",
       "id": "api_connection",
       "label": "API Connection",
+      "description": "Connect to your Browser Use API account.",
       "allowed_app_types": ["hyperline"],
       "allowed_connection_management_types": ["managed", "custom"]
     },
-    {"id": "task", "type": "string", "label": "Task Instructions", "description": "Instructions for what the agent should do", "validation": {"required": true}},
-    {"id": "schedule_type", "type": "string", "label": "Schedule Type", "description": "Type of schedule: interval or cron", "choices": {"values": [{"value": "interval", "label": "Interval"}, {"value": "cron", "label": "Cron"}]}, "validation": {"required": true}},
-    {"id": "interval_minutes", "type": "integer", "label": "Interval Minutes", "description": "Minutes between runs (required for interval schedule)"},
-    {"id": "cron_expression", "type": "string", "label": "Cron Expression", "description": "Cron expression for scheduling (required for cron schedule)"},
-    {"id": "start_at", "type": "string", "label": "Start At", "description": "When to start the schedule (ISO 8601 format, defaults to now)"},
-    {"id": "end_at", "type": "string", "label": "End At", "description": "When to end the schedule (ISO 8601 format, defaults to 1 year from now)"},
-    {"id": "secrets", "type": "object", "label": "Secrets", "description": "Dictionary of secrets to be used by the agent"},
-    {"id": "allowed_domains", "type": "array", "label": "Allowed Domains", "description": "List of domains the agent is allowed to visit", "items": {"type": "string", "label": "Domain"}},
-    {"id": "save_browser_data", "type": "boolean", "label": "Save Browser Data", "description": "Whether to save browser cookies and data between runs", "default": false},
-    {"id": "structured_output_json", "type": "string", "label": "Structured Output JSON", "description": "JSON schema for structured output"},
-    {"id": "llm_model", "type": "string", "label": "LLM Model", "description": "LLM model to use", "choices": {"values": [
-      {"value": "gpt-4o", "label": "gpt-4o"},
-      {"value": "gpt-4o-mini", "label": "gpt-4o-mini"},
-      {"value": "gpt-4.1", "label": "gpt-4.1"},
-      {"value": "gpt-4.1-mini", "label": "gpt-4.1-mini"},
-      {"value": "o4-mini", "label": "o4-mini"},
-      {"value": "o3", "label": "o3"},
-      {"value": "gemini-2.0-flash", "label": "gemini-2.0-flash"},
-      {"value": "gemini-2.0-flash-lite", "label": "gemini-2.0-flash-lite"},
-      {"value": "gemini-2.5-flash-preview-04-17", "label": "gemini-2.5-flash-preview-04-17"},
-      {"value": "gemini-2.5-flash", "label": "gemini-2.5-flash"},
-      {"value": "gemini-2.5-pro", "label": "gemini-2.5-pro"},
-      {"value": "claude-3-7-sonnet-20250219", "label": "claude-3-7-sonnet-20250219"},
-      {"value": "claude-sonnet-4-20250514", "label": "claude-sonnet-4-20250514"},
-      {"value": "llama-4-maverick-17b-128e-instruct", "label": "llama-4-maverick-17b-128e-instruct"}
-    ]}, "default": "gpt-4o"},
-    {"id": "use_adblock", "type": "boolean", "label": "Use Adblock", "description": "Whether to use an adblocker", "default": true},
-    {"id": "use_proxy", "type": "boolean", "label": "Use Proxy", "description": "Whether to use a proxy", "default": true},
-    {"id": "proxy_country_code", "type": "string", "label": "Proxy Country Code", "description": "Country code for residential proxy", "choices": {"values": [
-      {"value": "us", "label": "US"},
-      {"value": "uk", "label": "UK"},
-      {"value": "fr", "label": "FR"},
-      {"value": "it", "label": "IT"},
-      {"value": "jp", "label": "JP"},
-      {"value": "au", "label": "AU"},
-      {"value": "de", "label": "DE"},
-      {"value": "fi", "label": "FI"},
-      {"value": "ca", "label": "CA"},
-      {"value": "in", "label": "IN"}
-    ]}, "default": "us"},
-    {"id": "highlight_elements", "type": "boolean", "label": "Highlight Elements", "description": "Whether to highlight elements on the page", "default": true},
-    {"id": "included_file_names", "type": "array", "label": "Included File Names", "description": "File names to include in the task", "items": {"type": "string", "label": "File Name"}},
-    {"id": "browser_viewport_width", "type": "integer", "label": "Browser Viewport Width", "description": "Width of browser viewport in pixels", "default": 1280},
-    {"id": "browser_viewport_height", "type": "integer", "label": "Browser Viewport Height", "description": "Height of browser viewport in pixels", "default": 960},
-    {"id": "max_agent_steps", "type": "integer", "label": "Max Agent Steps", "description": "Maximum number of agent steps (max: 200)", "default": 75},
-    {"id": "enable_public_share", "type": "boolean", "label": "Enable Public Share", "description": "Whether to enable public sharing of task executions", "default": false}
+    {
+      "id": "task",
+      "type": "string",
+      "label": "Task Instructions",
+      "description": "Instructions for what the agent should do."
+    },
+    {
+      "id": "schedule_type",
+      "type": "string",
+      "label": "Schedule Type",
+      "on_action": {
+        "load_schema": true
+      },
+      "description": "Type of schedule: interval or cron.",
+      "choices": {
+        "values": [
+          { "value": "interval", "label": "Interval" },
+          { "value": "cron", "label": "Cron" }
+        ]
+      },
+        "default": "interval"
+          },
+    
+    {
+      "id": "interval_minutes",
+      "type": "integer",
+      "label": "Interval Minutes",
+      "description": "Minutes between runs (required for interval schedule).",
+      "rules": [
+    {
+      "if": {
+        "and": [
+          {
+            "id": "schedule_type",
+            "operator": "not_equal",
+            "value": "interval"
+          }
+        ]
+      },
+      "then": {
+        "fields": [
+          {
+            "id": "interval_minutes",
+            "ui_options": {
+              "ui_widget": "hidden"
+            },
+            "apply_as": "merge"
+          }
+        ]
+      }
+    }
+  ]
+    },
+    {
+      "id": "cron_minute",
+      "type": "string",
+      "label": "Minute",
+      "description": "Minute (0-59) for cron schedule.",
+      "choices": {
+        "values": [
+          { "value": "0", "label": "0" },
+          { "value": "15", "label": "15" },
+          { "value": "30", "label": "30" },
+          { "value": "45", "label": "45" },
+          { "value": "*", "label": "Every minute (*)" }
+        ]
+      },
+      "default": "0"
+    },
+    {
+      "id": "cron_hour",
+      "type": "string",
+      "label": "Hour",
+      "description": "Hour (0-23) for cron schedule.",
+      "choices": {
+        "values": [
+          { "value": "9", "label": "9" },
+          { "value": "12", "label": "12" },
+          { "value": "15", "label": "15" },
+          { "value": "*", "label": "Every hour (*)" }
+        ]
+      },
+      "default": "9"
+    },
+    {
+      "id": "cron_day_of_month",
+      "type": "string",
+      "label": "Day of Month",
+      "description": "Day of month (1-31) for cron schedule. For weekly schedules, select 'Every week' and set 'Day of Week' below.",
+      "choices": {
+        "values": [
+          { "value": "*", "label": "Every day (*)" },
+          { "value": "1", "label": "First day of month (1)" },
+          { "value": "15", "label": "15th of month (15)" },
+          { "value": "31", "label": "Last day of month (31)" },
+          { "value": "WEEKLY", "label": "Every week (set 'Day of Week' below)" }
+        ]
+      },
+      "default": "*"
+    },
+    {
+      "id": "cron_month",
+      "type": "string",
+      "label": "Month",
+      "description": "Month (1-12) for cron schedule.",
+      "choices": {
+        "values": [
+          { "value": "*", "label": "Every month (*)" },
+          { "value": "1", "label": "Jan (1)" },
+          { "value": "6", "label": "Jun (6)" },
+          { "value": "12", "label": "Dec (12)" }
+        ]
+      },
+      "default": "*"
+    },
+    {
+      "id": "cron_day_of_week",
+      "type": "string",
+      "label": "Day of Week",
+      "description": "Day of week (0-7, where 0 and 7 are Sunday) for cron schedule.",
+      "choices": {
+        "values": [
+          { "value": "*", "label": "Every day (*)" },
+          { "value": "1", "label": "Mon (1)" },
+          { "value": "5", "label": "Fri (5)" },
+          { "value": "0", "label": "Sun (0)" },
+          { "value": "7", "label": "Sun (7)" }
+        ]
+      },
+      "default": "*"
+    },
+    {
+      "id": "start_at",
+      "type": "string",
+      "label": "Start At",
+      "description": "When to start the schedule. Enter date and time in ISO 8601 format (e.g., 2025-07-24T09:00:00Z). Defaults to now."
+    },
+    {
+      "id": "end_at",
+      "type": "string",
+      "label": "Expire At",
+      "description": "When to end the schedule. Enter date and time in ISO 8601 format (e.g., 2026-07-24T09:00:00Z). Defaults to 1 year from now."
+    },
+    {
+      "type": "string",
+      "id": "secrets",
+      "label": "Secrets",
+      "description": "Add any secret values/credentials the agent needs. Use JSON format.",
+      "default": "{}",
+      "ui_options": {
+        "ui_widget": "CodeblockWidget",
+        "ui_options": { "language": "json" }
+      }
+    },
+    {
+      "id": "allowed_domains",
+      "type": "array",
+      "label": "Allowed Domains",
+      "description": "List of domains the agent is allowed to visit.",
+      "items": { "type": "string", "label": "Domain" },
+      "default": []
+    },
+    {
+      "id": "save_browser_data",
+      "type": "boolean",
+      "label": "Save Browser Data",
+      "description": "Whether to save browser cookies and data between runs.",
+      "default": false
+    },
+    {
+      "id": "structured_output_json",
+      "type": "string",
+      "label": "Structured Output JSON",
+      "description": "JSON schema for structured output."
+    },
+    {
+      "id": "llm_model",
+      "type": "string",
+      "label": "LLM Model",
+      "description": "LLM model to use.",
+      "default": "gpt-4o",
+      "choices": {
+        "values": [
+          { "value": "gpt-4o", "label": "gpt-4o" },
+          { "value": "gpt-4o-mini", "label": "gpt-4o-mini" },
+          { "value": "gpt-4.1", "label": "gpt-4.1" },
+          { "value": "gpt-4.1-mini", "label": "gpt-4.1-mini" },
+          { "value": "gemini-2.5-flash", "label": "gemini-2.5-flash" },
+          {
+            "value": "claude-sonnet-4-20250514",
+            "label": "claude-sonnet-4-20250514"
+          }
+        ]
+      }
+    },
+    {
+      "id": "use_adblock",
+      "type": "boolean",
+      "label": "Use Adblock",
+      "description": "Whether to use an adblocker.",
+      "default": true
+    },
+    {
+      "id": "use_proxy",
+      "type": "boolean",
+      "label": "Use Proxy",
+      "description": "Whether to use a proxy.",
+      "default": true
+    },
+    {
+      "id": "proxy_country_code",
+      "type": "string",
+      "label": "Proxy Country Code",
+      "description": "Country code for residential proxy.",
+      "default": "us",
+      "choices": {
+        "values": [
+          { "value": "us", "label": "US" },
+          { "value": "fr", "label": "FR" },
+          { "value": "it", "label": "IT" },
+          { "value": "jp", "label": "JP" },
+          { "value": "au", "label": "AU" },
+          { "value": "de", "label": "DE" },
+          { "value": "fi", "label": "FI" },
+          { "value": "ca", "label": "CA" }
+        ]
+      }
+    },
+    {
+      "id": "highlight_elements",
+      "type": "boolean",
+      "label": "Highlight Elements",
+      "description": "Whether to highlight elements on the page.",
+      "default": true
+    },
+    {
+      "id": "browser_viewport_width",
+      "type": "integer",
+      "label": "Browser Viewport Width",
+      "description": "Width of browser viewport in pixels.",
+      "default": 1280
+    },
+    {
+      "id": "browser_viewport_height",
+      "type": "integer",
+      "label": "Browser Viewport Height",
+      "description": "Height of browser viewport in pixels.",
+      "default": 960
+    },
+    {
+      "id": "max_agent_steps",
+      "type": "integer",
+      "label": "Max Agent Steps",
+      "description": "Maximum number of agent steps (max: 200).",
+      "default": 75,
+      "validation": { "minimum": 1, "maximum": 200, "type": "integer" }
+    },
+    {
+      "id": "enable_public_share",
+      "type": "boolean",
+      "label": "Enable Public Share",
+      "description": "Whether to enable public sharing of task executions.",
+      "default": false
+    }
   ],
   "ui_options": {
-    "ui_order": ["api_connection", "task", "schedule_type", "interval_minutes", "cron_expression", "start_at", "end_at", "secrets", "allowed_domains", "save_browser_data", "structured_output_json", "llm_model", "use_adblock", "use_proxy", "proxy_country_code", "highlight_elements", "included_file_names", "browser_viewport_width", "browser_viewport_height", "max_agent_steps", "enable_public_share"]
+    "ui_order": [
+      "api_connection",
+      "task",
+      "schedule_type",
+      "interval_minutes",
+      "cron_minute",
+      "cron_hour",
+      "cron_day_of_month",
+      "cron_month",
+      "cron_day_of_week",
+      "start_at",
+      "end_at",
+      "secrets",
+      "allowed_domains",
+      "save_browser_data",
+      "structured_output_json",
+      "llm_model",
+      "use_adblock",
+      "use_proxy",
+      "proxy_country_code",
+      "highlight_elements",
+      "browser_viewport_width",
+      "browser_viewport_height",
+      "max_agent_steps",
+      "enable_public_share"
+    ]
   }
 }

@@ -1,4 +1,3 @@
-name: delete_browser_profile_for_user
-version: v1
-description: Deletes the browser profile for the user, clearing all browser data.
-author: stacksync-template
+module_settings:
+  module_name: "Delete Browser Profile For User"
+  module_description: "Deletes the browser profile for the user. This is useful when you want to start with a fresh browser state, clearing all stored cookies, sessions, and browser data."

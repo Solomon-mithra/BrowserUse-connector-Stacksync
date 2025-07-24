@@ -1,3 +1,0 @@
-module_settings:
-  module_name: "Get Task Output File"
-  module_description: "Returns a presigned URL for downloading a file from the task output files."

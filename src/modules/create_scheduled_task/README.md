@@ -1,30 +1,40 @@
 # Create Scheduled Task Module
 
-Creates a new scheduled browser automation task to run at regular intervals or based on a cron expression.
+## Purpose
+Create a new scheduled task to run at regular intervals or based on a cron expression. Automate recurring browser automation tasks.
 
 ## Endpoints
-- /execute: Creates a scheduled task
-- /content: (optional, for managed dropdowns)
-- /schema: Returns the schema for this module
+- `/execute` (POST): Creates a scheduled task with interval or cron schedule.
 
-## Parameters
-- task (string, required): Instructions for what the agent should do
-- schedule_type (string, required): Type of schedule: "interval" or "cron"
-- interval_minutes (integer): Minutes between runs (required for interval schedule)
-- cron_expression (string): Cron expression for scheduling (required for cron schedule)
-- start_at (string): When to start the schedule (ISO 8601 format, defaults to now)
-- end_at (string): When to end the schedule (ISO 8601 format, defaults to 1 year from now)
-- secrets (object): Dictionary of secrets to be used by the agent
-- allowed_domains (array): List of domains the agent is allowed to visit
-- save_browser_data (boolean, default: false): Whether to save browser cookies and data between runs
-- structured_output_json (string): JSON schema for structured output
-- llm_model (string, default: "gpt-4o"): LLM model to use
-- use_adblock (boolean, default: true): Whether to use an adblocker
-- use_proxy (boolean, default: true): Whether to use a proxy
-- proxy_country_code (string, default: "us"): Country code for residential proxy
-- highlight_elements (boolean, default: true): Whether to highlight elements on the page
-- included_file_names (array): File names to include in the task
-- browser_viewport_width (integer, default: 1280): Width of browser viewport in pixels
-- browser_viewport_height (integer, default: 960): Height of browser viewport in pixels
-- max_agent_steps (integer, default: 75): Maximum number of agent steps (max: 200)
-- enable_public_share (boolean, default: false): Whether to enable public sharing of task executions
+## Fields
+- **api_connection**: API connection to Browser Use.
+- **task**: Instructions for the agent.
+- **schedule_type**: "interval" or "cron".
+- **interval_minutes**: Minutes between runs (for interval schedule).
+- **cron_minute, cron_hour, cron_day_of_month, cron_month, cron_day_of_week**: Selectors for cron schedule.
+- **start_at, end_at**: When to start/end the schedule.
+- **secrets, allowed_domains, save_browser_data, structured_output_json, llm_model, use_adblock, use_proxy, proxy_country_code, highlight_elements, included_file_names, browser_viewport_width, browser_viewport_height, max_agent_steps, enable_public_share**: All supported options.
+
+## Example Request (cron)
+```
+{
+  "api_connection": { ... },
+  "task": "Do something",
+  "schedule_type": "cron",
+  "cron_minute": "0",
+  "cron_hour": "9",
+  "cron_day_of_month": "*",
+  "cron_month": "*",
+  "cron_day_of_week": "1-5"
+}
+```
+
+## Example Request (interval)
+```
+{
+  "api_connection": { ... },
+  "task": "Do something",
+  "schedule_type": "interval",
+  "interval_minutes": 60
+}
+```

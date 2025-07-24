@@ -1,3 +1,0 @@
-module_settings:
-  module_name: "Pause Task"
-  module_description: "Pauses execution of a running browser automation task."

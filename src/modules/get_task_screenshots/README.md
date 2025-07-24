@@ -1,11 +1,27 @@
 # Get Task Screenshots Module
 
-Get screenshots generated during browser automation task execution.
+## Purpose
+Get screenshots generated during task execution. Returns screenshot URLs captured at key moments.
 
 ## Endpoints
-- /execute: Retrieves screenshot URLs for the specified task
-- /content: (optional, not needed for this module)
-- /schema: Returns the schema for this module
+- `/execute` (POST): Returns screenshot URLs for a given `task_id`.
 
-## Parameters
-- task_id (string, required): ID of the task to retrieve screenshots for
+## Fields
+- **api_connection**: API connection to Browser Use.
+- **task_id**: ID of the task to get screenshots for.
+
+## Example Request
+```
+{
+  "api_connection": { ... },
+  "task_id": "abc123"
+}
+```
+
+## Example Response
+```
+{
+  "data": { "screenshots": ["https://...", "https://..."] },
+  "metadata": { "processed_at": "2024-01-01T00:00:00Z" }
+}
+```

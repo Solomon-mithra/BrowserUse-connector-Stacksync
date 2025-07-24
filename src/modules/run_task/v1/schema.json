@@ -6,14 +6,14 @@
     {
       "type": "connection",
       "id": "api_connection",
-      "label": "API Connection",
+      "label": "Connection",
       "allowed_app_types": ["hyperline"],
       "allowed_connection_management_types": ["managed", "custom"]
     },
     {
       "id": "task",
       "type": "string",
-      "label": "Task Instructions",
+      "label": "Task",
       "description": "Instructions for what the agent should do.",
       "validation": { "required": true },
       "ui_options": { "ui_widget": "textarea" }
@@ -22,20 +22,18 @@
       "type": "string",
       "id": "secrets",
       "label": "Secrets",
-      "description": "Dictionary of secrets to be used by the agent. Secrets are safely encrypted before storing in the database.",
+      "description": "Add any secret values/credentials the agent needs. Use JSON format.",
       "default": "{}",
       "ui_options": {
         "ui_widget": "CodeblockWidget",
-        "ui_options": {
-          "language": "json"
-        }
+        "ui_options": { "language": "json" }
       }
     },
     {
       "id": "allowed_domains",
       "type": "array",
       "label": "Allowed Domains",
-      "description": "List of domains that the agent is allowed to visit. Add domains as individual text fields. If not set, the agent will be allowed to visit all domains (not recommended if you are using secrets).",
+      "description": "List websites the agent can visit. Leave empty to allow all.",
       "items": {
         "type": "string",
         "label": "Domain",
@@ -50,14 +48,14 @@
       "id": "save_browser_data",
       "type": "boolean",
       "label": "Save Browser Data",
-      "description": "If set to True, the browser cookies and other data will be saved. Cookies are safely encrypted before storing in the database.",
+      "description": "Save cookies and browser data for future use.",
       "default": false
     },
     {
       "id": "structured_output_json",
       "type": "string",
-      "label": "Structured Output JSON",
-      "description": "If set, the agent will use this JSON schema as the output model.",
+      "label": "Output JSON Schema",
+      "description": "Set a JSON schema for the agent's output.",
       "ui_options": {
         "ui_widget": "CodeblockWidget",
         "ui_options": { "language": "json" }
@@ -67,7 +65,7 @@
       "id": "llm_model",
       "type": "string",
       "label": "LLM Model",
-      "description": "LLM model to use.",
+      "description": "Choose the AI model to use.",
       "default": "gpt-4.1",
       "choices": {
         "values": [
@@ -76,10 +74,7 @@
           { "value": "gpt-4.1", "label": "gpt-4.1" },
           { "value": "gpt-4.1-mini", "label": "gpt-4.1-mini" },
           { "value": "gemini-2.5-flash", "label": "gemini-2.5-flash" },
-          {
-            "value": "claude-sonnet-4-20250514",
-            "label": "claude-sonnet-4-20250514"
-          }
+          { "value": "claude-sonnet-4-20250514", "label": "claude-sonnet-4-20250514" }
         ]
       }
     },
@@ -100,8 +95,8 @@
     {
       "id": "proxy_country_code",
       "type": "string",
-      "label": "Proxy Country Code",
-      "description": "Country code for residential proxy.",
+      "label": "Proxy Country",
+      "description": "Pick the country code for the proxy server.",
       "default": "us",
       "choices": {
         "values": [
@@ -120,45 +115,40 @@
       "id": "highlight_elements",
       "type": "boolean",
       "label": "Highlight Elements",
-      "description": "If set to True, the agent will highlight the elements on the page.",
+      "description": "If set to True, the agent will highlight the elements on the page while executing the task.",
       "default": true
-    },
-    {
-      "id": "included_file_names",
-      "type": "string",
-      "label": "Included File Names",
-      "description": "File names to include in the task.",
-      "ui_options": {
-        "ui_widget": "CodeblockWidget",
-        "ui_options": { "language": "json" }
-      }
     },
     {
       "id": "browser_viewport_width",
       "type": "integer",
-      "label": "Browser Viewport Width",
-      "description": "Width of the browser viewport in pixels.",
+      "label": "Viewport Width",
+      "description": "Set the browser window width (pixels).",
       "default": 1280
     },
     {
       "id": "browser_viewport_height",
       "type": "integer",
-      "label": "Browser Viewport Height",
-      "description": "Height of the browser viewport in pixels.",
+      "label": "Viewport Height",
+      "description": "Set the browser window height (pixels).",
       "default": 960
     },
     {
       "id": "max_agent_steps",
       "type": "integer",
-      "label": "Max Agent Steps",
-      "description": "Maximum number of agent steps to take.",
-      "default": 75
+      "label": "Max Steps",
+      "description": "Set the maximum number of steps the agent can take (75–200).",
+      "default": 75,
+      "validation": {
+        "minimum": 75,
+        "maximum": 200,
+        "type": "integer"
+      }
     },
     {
       "id": "enable_public_share",
       "type": "boolean",
       "label": "Enable Public Share",
-      "description": "If set to True, enables public sharing of the task execution.",
+      "description": "Allow anyone with the link (generated) to see the task result.",
       "default": false
     }
   ],

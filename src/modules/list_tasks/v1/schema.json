@@ -7,31 +7,12 @@
       "type": "connection",
       "id": "api_connection",
       "label": "API Connection",
+      "description": "Connect to your Browser Use API account.",
       "allowed_app_types": ["hyperline"],
       "allowed_connection_management_types": ["managed", "custom"]
-    },
-    {
-      "id": "page",
-      "type": "integer",
-      "label": "Page Number",
-      "description": "Page number (minimum: 1)",
-      "default": 1,
-      "validation": {
-        "minimum": 1
-      }
-    },
-    {
-      "id": "limit",
-      "type": "integer",
-      "label": "Items Per Page",
-      "description": "Number of items per page (minimum: 1)",
-      "default": 10,
-      "validation": {
-        "minimum": 1
-      }
     }
   ],
   "ui_options": {
-    "ui_order": ["api_connection", "page", "limit"]
+    "ui_order": ["api_connection"]
   }
 }
