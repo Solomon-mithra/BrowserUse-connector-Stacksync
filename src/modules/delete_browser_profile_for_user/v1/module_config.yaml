@@ -1,3 +1,0 @@
-module_settings:
-  module_name: "Delete Browser Profile For User"
-  module_description: "Deletes the browser profile for the user. This is useful when you want to start with a fresh browser state, clearing all stored cookies, sessions, and browser data."

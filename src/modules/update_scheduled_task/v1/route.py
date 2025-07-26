@@ -13,13 +13,15 @@ def build_cron_expression(minute, hour, day_of_month, month, day_of_week):
 
 def update_scheduled_task(access_token: str, task_id: str, data: dict):
     url = f"https://api.browser-use.com/api/v1/scheduled-task/{task_id}"
+    # Only include fields present and filled in the request for partial update
+    def is_filled(val):
+        return val not in [None, "", []]
     payload = {}
-    # Only include fields present in the request for partial update
     for field in [
         "task", "schedule_type", "interval_minutes", "cron_expression", "start_at", "end_at", "is_active",
         "use_adblock", "use_proxy", "highlight_elements", "llm_model", "save_browser_data", "structured_output_json"
     ]:
-        if field in data:
+        if field in data and is_filled(data[field]):
             payload[field] = data[field]
     # If schedule_type is cron and cron fields are present, build cron_expression
     if data.get("schedule_type") == "cron" and all(k in data for k in ["cron_minute", "cron_hour", "cron_day_of_month", "cron_month", "cron_day_of_week"]):

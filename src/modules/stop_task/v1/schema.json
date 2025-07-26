@@ -1,0 +1,25 @@
+{
+  "metadata": {
+    "workflows_module_schema_version": "1.0.0"
+  },
+  "fields": [
+    {
+      "type": "connection",
+      "id": "api_connection",
+      "label": "API Connection",
+      "description": "Connect to your Browser Use API account.",
+      "allowed_app_types": ["hyperline"],
+      "allowed_connection_management_types": ["managed", "custom"]
+    },
+    {
+      "type": "string",
+      "id": "task_id",
+      "label": "Task ID",
+      "description": "ID of the task to stop.",
+      "validation": { "required": true }
+    }
+  ],
+  "ui_options": {
+    "ui_order": ["api_connection", "task_id"]
+  }
+}

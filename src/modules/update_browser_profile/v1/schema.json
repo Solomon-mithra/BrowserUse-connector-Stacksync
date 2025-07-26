@@ -1,0 +1,84 @@
+{
+  "metadata": {
+    "workflows_module_schema_version": "1.0.0"
+  },
+  "fields": [
+    {
+      "type": "connection",
+      "id": "api_connection",
+      "label": "API Connection",
+      "description": "Connect to your Browser Use API account.",
+      "allowed_app_types": ["hyperline"],
+      "allowed_connection_management_types": ["managed", "custom"]
+    },
+    {
+      "type": "string",
+      "id": "profile_id",
+      "label": "Profile ID",
+      "description": "ID of the browser profile to update.",
+      "validation": { "required": true }
+    },
+    {
+      "type": "string",
+      "id": "profile_name",
+      "label": "Profile Name",
+      "description": "Name of the browser profile."
+    },
+    {
+      "type": "string",
+      "id": "description",
+      "label": "Description",
+      "description": "Description of the profile."
+    },
+    {
+      "type": "boolean",
+      "id": "persist",
+      "label": "Save cookies, local storage, and session data",
+      "description": "Save cookies, local storage, and session data between tasks."
+    },
+    {
+      "type": "boolean",
+      "id": "ad_blocker",
+      "label": "Enable Ad Blocker",
+      "description": "Block ads and popups during automated tasks."
+    },
+    {
+      "type": "boolean",
+      "id": "proxy",
+      "label": "Use Proxy",
+      "description": "Route traffic through mobile proxies for better stealth."
+    },
+    {
+      "type": "string",
+      "id": "proxy_country_code",
+      "label": "Proxy Country Code",
+      "description": "Country code for the proxy."
+    },
+    {
+      "type": "integer",
+      "id": "browser_viewport_width",
+      "label": "Browser Viewport Width",
+      "description": "Browser viewport width in pixels."
+    },
+    {
+      "type": "integer",
+      "id": "browser_viewport_height",
+      "label": "Browser Viewport Height",
+      "description": "Browser viewport height in pixels."
+    }
+  ],
+  "ui_options": {
+    "ui_order": [
+      "api_connection",
+      "profile_id",
+      "profile_name",
+      "description",
+      "persist",
+      "ad_blocker",
+      "proxy",
+      "proxy_country_code",
+      "browser_viewport_width",
+      "browser_viewport_height"
+    ]
+  }
+}

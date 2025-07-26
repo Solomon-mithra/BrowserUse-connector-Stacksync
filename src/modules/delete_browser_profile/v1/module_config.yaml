@@ -1,0 +1,3 @@
+module_settings:
+  module_name: "Delete Browser Profile"
+  module_description: "Deletes a browser profile and all associated browser data. This action cannot be undone."

@@ -1,0 +1,3 @@
+module_settings:
+  module_name: "Create Browser Profile"
+  module_description: "Create a new browser profile with custom settings for ad blocking, proxy usage, and viewport dimensions."

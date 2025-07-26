@@ -1,0 +1,3 @@
+module_settings:
+  module_name: "Resume Task"
+  module_description: "Resumes execution of a previously paused task. The task will continue from where it was paused."

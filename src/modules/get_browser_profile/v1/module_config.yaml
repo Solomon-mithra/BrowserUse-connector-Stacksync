@@ -1,0 +1,3 @@
+module_settings:
+  module_name: "Get Browser Profile"
+  module_description: "Returns information about a specific browser profile and its configuration settings."

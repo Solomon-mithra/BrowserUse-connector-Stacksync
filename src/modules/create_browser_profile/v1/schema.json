@@ -1,0 +1,96 @@
+{
+  "metadata": {
+    "workflows_module_schema_version": "1.0.0"
+  },
+  "fields": [
+    {
+      "type": "connection",
+      "id": "api_connection",
+      "label": "API Connection",
+      "description": "Connect to your Browser Use API account.",
+      "allowed_app_types": ["hyperline"],
+      "allowed_connection_management_types": ["managed", "custom"]
+    },
+    {
+      "type": "string",
+      "id": "profile_name",
+      "label": "Profile Name",
+      "description": "Name of the browser profile.",
+      "validation": { "required": true }
+    },
+    {
+      "type": "string",
+      "id": "description",
+      "label": "Description",
+      "description": "Description of the profile.",
+      "default": ""
+    },
+    {
+      "type": "boolean",
+      "id": "persist",
+      "label": "Save cookies, local storage, and session data",
+      "description": "Save cookies, local storage, and session data between tasks.",
+      "default": true
+    },
+    {
+      "type": "boolean",
+      "id": "ad_blocker",
+      "label": "Enable Ad Blocker",
+      "description": "Block ads and popups during automated tasks.",
+      "default": true
+    },
+    {
+      "type": "boolean",
+      "id": "proxy",
+      "label": "Use Proxy",
+      "description": "Route traffic through mobile proxies for better stealth.",
+      "default": true
+    },
+    {
+      "id": "proxy_country_code",
+      "type": "string",
+      "label": "Proxy Country Code",
+      "description": "Country code for residential proxy.",
+      "default": "us",
+      "choices": {
+        "values": [
+          { "value": "us", "label": "US" },
+          { "value": "fr", "label": "FR" },
+          { "value": "it", "label": "IT" },
+          { "value": "jp", "label": "JP" },
+          { "value": "au", "label": "AU" },
+          { "value": "de", "label": "DE" },
+          { "value": "fi", "label": "FI" },
+          { "value": "ca", "label": "CA" }
+        ]
+      }
+    },
+    {
+      "type": "integer",
+      "id": "browser_viewport_width",
+      "label": "Browser Viewport Width",
+      "description": "Browser viewport width in pixels.",
+      "default": 1280
+    },
+    {
+      "type": "integer",
+      "id": "browser_viewport_height",
+      "label": "Browser Viewport Height",
+      "description": "Browser viewport height in pixels.",
+      "default": 960
+    }
+  ],
+  "ui_options": {
+    "ui_order": [
+      "api_connection",
+      "profile_name",
+      "description",
+      "persist",
+      "ad_blocker",
+      "proxy",
+      "proxy_country_code",
+      "browser_viewport_width",
+      "browser_viewport_height"
+    ]
+  }
+}
